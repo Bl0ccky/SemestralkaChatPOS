@@ -1,45 +1,32 @@
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <stdio.h>
-#include "server.h"
+#ifndef CHAT_ARRAYFROMINTERNET_H
+#define CHAT_ARRAYFROMINTERNET_H
 
+#endif //CHAT_ARRAYFROMINTERNET_H
 
-#ifndef CHAT_ARRAYLIST_H
-#define CHAT_ARRAYLIST_H
+/* This file was automatically generated.  Do not edit! */
+typedef struct arraylist arraylist;
+void arraylist_destroy(arraylist *l);
+void arraylist_splice(arraylist *l,arraylist *source,unsigned int index);
+void arraylist_join(arraylist *l,arraylist *source);
+arraylist *arraylist_copy(arraylist *l);
+arraylist *arraylist_slice_end(arraylist *l,unsigned int index);
+arraylist *arraylist_slice(arraylist *l,unsigned int index,unsigned int length);
+void arraylist_clear(arraylist *l);
+void *arraylist_remove(arraylist *l,unsigned int index);
+void arraylist_insert(arraylist *l,unsigned int index,void *value);
+void arraylist_set(arraylist *l,unsigned int index,void *value);
+void *arraylist_get(arraylist *l,unsigned int index);
+void *arraylist_pop(arraylist *l);
+void arraylist_add(arraylist *l,void *item);
+inline unsigned int arraylist_size(arraylist *l);
+void arraylist_allocate(arraylist *l,unsigned int size);
+arraylist *arraylist_create();
+#define arraylist_iterate(l, index, item) \
+	for (index = 0, item = l->body[0]; index < l->size; item = l->body[++index])
+struct arraylist {
+    unsigned int size; // Count of items currently in list
+    unsigned int capacity; // Allocated memory size, in items
+    void** body; // Pointer to allocated memory for items (of size capacity * sizeof(void*))
+};
+#define INTERFACE 0
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-typedef struct ArrayList
-{
-    Client ** array;
-    int capacity;
-    int size;
-}ArrayList;
-
-
-
-void init(ArrayList*array);
-void dispose(ArrayList*array);
-Client * getClient(const ArrayList*array, char * name);
-void removeClient(ArrayList*array, char * name);
-void printNames(const ArrayList*array);
-void add(ArrayList*array, Client * data);
-
-
-_Bool tryInsert(ArrayList*array, Client * data, int pos);
-_Bool trySet(ArrayList*array, int pos, char * data);
-_Bool tryGet(ArrayList*array, int pos, char ** data);
-_Bool tryRemove(ArrayList*array, int pos, char ** data);
-_Bool tryCopy(const ArrayList*src, ArrayList*dest); //využite funkciu memcpy
-void readFromTxt(ArrayList*array, FILE *txtFile);
-void writeToTxt(const ArrayList*array, FILE *txtFile);
-
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif //CHAT_ARRAYLIST_H
