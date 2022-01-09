@@ -29,3 +29,4 @@ struct arraylist {
     void** body; // Pointer to allocated memory for items (of size capacity * sizeof(void*))
 };
 #define INTERFACE 0
+
