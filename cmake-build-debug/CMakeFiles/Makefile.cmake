@@ -10,6 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../CMakeLists.txt"
   "CMakeFiles/3.18.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.18.4/CMakeSystem.cmake"
+
   "/usr/share/cmake-3.18/Modules/CMakeCCompiler.cmake.in"
   "/usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c"
   "/usr/share/cmake-3.18/Modules/CMakeCInformation.cmake"
@@ -24,10 +25,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.18/Modules/CMakeDetermineSystem.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeFindBinUtils.cmake"
+
   "/usr/share/cmake-3.18/Modules/CMakeFindCodeBlocks.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeGenericSystem.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeInitializeConfigs.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeLanguageInformation.cmake"
+
   "/usr/share/cmake-3.18/Modules/CMakeParseImplicitIncludeInfo.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeParseImplicitLinkInfo.cmake"
   "/usr/share/cmake-3.18/Modules/CMakeSystem.cmake.in"
@@ -75,6 +78,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.18/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "/usr/share/cmake-3.18/Modules/Internal/CMakeCheckCompilerFlag.cmake"
   "/usr/share/cmake-3.18/Modules/Internal/FeatureTesting.cmake"
+
   "/usr/share/cmake-3.18/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/share/cmake-3.18/Modules/Platform/Linux-GNU.cmake"
   "/usr/share/cmake-3.18/Modules/Platform/Linux.cmake"
@@ -90,13 +94,17 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+
   "CMakeFiles/3.18.4/CMakeSystem.cmake"
   "CMakeFiles/3.18.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.18.4/CMakeCCompiler.cmake"
+
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+
   "CMakeFiles/SemestrakaChatPOS.dir/DependInfo.cmake"
+
   )

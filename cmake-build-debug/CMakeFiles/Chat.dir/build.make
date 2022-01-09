@@ -62,10 +62,12 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+
 CMAKE_SOURCE_DIR = /tmp/tmp.5TDpTqwwZt
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /tmp/tmp.5TDpTqwwZt/cmake-build-debug
+
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Chat.dir/depend.make
@@ -78,6 +80,7 @@ include CMakeFiles/Chat.dir/flags.make
 
 CMakeFiles/Chat.dir/main.c.o: CMakeFiles/Chat.dir/flags.make
 CMakeFiles/Chat.dir/main.c.o: ../main.c
+
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.5TDpTqwwZt/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Chat.dir/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Chat.dir/main.c.o -c /tmp/tmp.5TDpTqwwZt/main.c
 
@@ -144,6 +147,7 @@ Chat: CMakeFiles/Chat.dir/server.c.o
 Chat: CMakeFiles/Chat.dir/arrayList.c.o
 Chat: CMakeFiles/Chat.dir/build.make
 Chat: CMakeFiles/Chat.dir/link.txt
+
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.5TDpTqwwZt/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable Chat"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Chat.dir/link.txt --verbose=$(VERBOSE)
 
@@ -157,6 +161,7 @@ CMakeFiles/Chat.dir/clean:
 .PHONY : CMakeFiles/Chat.dir/clean
 
 CMakeFiles/Chat.dir/depend:
+
 	cd /tmp/tmp.5TDpTqwwZt/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.5TDpTqwwZt /tmp/tmp.5TDpTqwwZt /tmp/tmp.5TDpTqwwZt/cmake-build-debug /tmp/tmp.5TDpTqwwZt/cmake-build-debug /tmp/tmp.5TDpTqwwZt/cmake-build-debug/CMakeFiles/Chat.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Chat.dir/depend
 

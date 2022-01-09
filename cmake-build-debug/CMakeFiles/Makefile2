@@ -63,16 +63,20 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+
 CMAKE_SOURCE_DIR = /tmp/tmp.zGIpnpzV5n
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /tmp/tmp.zGIpnpzV5n/cmake-build-debug
 
+
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+
 all: CMakeFiles/SemestrakaChatPOS.dir/all
+
 
 .PHONY : all
 
@@ -82,11 +86,14 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+
 clean: CMakeFiles/SemestrakaChatPOS.dir/clean
+
 
 .PHONY : clean
 
 #=============================================================================
+
 # Target rules for target CMakeFiles/SemestrakaChatPOS.dir
 
 # All Build rule for target.
@@ -112,6 +119,7 @@ SemestrakaChatPOS: CMakeFiles/SemestrakaChatPOS.dir/rule
 CMakeFiles/SemestrakaChatPOS.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/clean
 .PHONY : CMakeFiles/SemestrakaChatPOS.dir/clean
+
 
 #=============================================================================
 # Special targets to cleanup operation of make.
