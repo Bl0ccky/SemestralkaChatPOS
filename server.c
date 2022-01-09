@@ -1,9 +1,7 @@
 #include <sys/stat.h>
 #include "server.h"
 
-
-char *pathToFiles = "/home/sinalova4/SemestralkaChat";
-
+char *pathToFiles = "/home/labat2/SemestralkaChat";
 
 Client *getClient(arraylist *array, char *name) {
 
@@ -38,7 +36,7 @@ void initListeningSocket(const int *port, int *listenfd, struct sockaddr_in *ser
     }
 
     //Listen
-    if (listen(*listenfd, 5) < 0) {
+    if (listen(*listenfd, 10) < 0) {
         perror("ERROR on listen");
     }
     printf("Koncim Listening init\n");
@@ -222,7 +220,36 @@ void acceptFriendRequest(Client *client, char *recv, char *send) {
 
 }
 
-void chceckFriendsRequests(Client *client) {
+bool checkAlreadyInFile(pthread_mutex_t * mutex, char *fileName, char *login) {
+    FILE *file;
+    printf("Idem sa pokusit otvorit %s\n", fileName);
+    int numOfLines = countNumOfLines(fileName, mutex);
+    pthread_mutex_lock(mutex);
+    file = fopen(fileName, "r");
+    char foundLogin[MAX_BUFFER_SIZE] = "";
+    bool found = false;
+
+    if (numOfLines > 0) {
+        for (int i = 0; i < numOfLines; ++i) {
+            fscanf(file, "%s", foundLogin);
+            printf("Precital som %s\n", foundLogin);
+            if (strcmp(foundLogin, login) == 0) {
+                printf("Nasiel som %s\n", foundLogin);
+                found = true;
+                break;
+            }
+
+        }
+    }
+    fclose(file);
+    pthread_mutex_unlock(mutex);
+    printf("checkhol som subor %s\n", fileName);
+    printf("V %s result: %d\n", fileName, found);
+
+    return found;
+}
+
+void checkFriendsRequests(Client *client) {
     printf("Idem otvorit friend requesty uzivatela %s\n", client->name);
 
     char fileName[MAX_BUFFER_SIZE];
@@ -235,10 +262,14 @@ void chceckFriendsRequests(Client *client) {
         FILE *requestFile;
         pthread_mutex_lock(client->sharedData->mutexRequests);
         requestFile = fopen(fileName, "r");
-
+        sprintf(fileName, "%s/chatUsers.txt", pathToFiles);
+        char password[MAX_BUFFER_SIZE];
         while (numOfRequests > 0) {
             fscanf(requestFile, "%s\n", sender);
-            acceptFriendRequest(client, client->name, sender);
+            if(checkExistingUser(client, sender, password))
+            {
+                acceptFriendRequest(client, client->name, sender);
+            }
             numOfRequests--;
         }
 
@@ -251,6 +282,13 @@ void chceckFriendsRequests(Client *client) {
         pthread_mutex_unlock(client->sharedData->mutexRequests);
         printf("Vytvoril som novy subor na requesty uzivatela %s nazvom %s\n", client->name, fileName);
     }
+
+    pthread_mutex_lock(client->mutexAddRequests);
+    if(client->numOfAddRequests>0)
+    {
+        client->numOfAddRequests=0;
+    }
+    pthread_mutex_unlock(client->mutexAddRequests);
 }
 
 bool checkAlreadyLoggedIn(Client *client, char *login) {
@@ -301,15 +339,52 @@ void log(Client *client, char *login) {
 
 }
 
+void checkNewRemoval(Client *client) {
+    FILE *file;
+    char fileName[MAX_BUFFER_SIZE];
+    char buffer[MAX_BUFFER_SIZE];
+    sprintf(fileName, "%s/%s/%sRemoveFriends.txt", pathToFiles, client->name, client->name);
+    bool opened = false;
+    pthread_mutex_lock(client->sharedData->mutexRemovedFriend);
+    if (file = fopen(fileName, "r")) {
+        opened = true;
+        char removed[MAX_BUFFER_SIZE];
+        strcpy(buffer, "Z priatelov si ta odstranili:\n");
+        while (!feof(file)) {
+            fscanf(file, "%s", removed);
+            printf("Uzivatel %s si odstranil uzivatela %s z priatelov :(\n", removed, client->name);
+            strcat(buffer, removed);
+            strcat(buffer, "\n");
+        }
+        fclose(file);
+        pthread_mutex_unlock(client->sharedData->mutexRemovedFriend);
+        remove(fileName);
+        strcat(buffer, "Pre navrat do menu stlac lubovolnu klavesu");
+        write(client->sockfd, buffer, strlen(buffer) + 1);
+        read(client->sockfd, buffer, sizeof(buffer));
+    }
+    if(!opened)
+    {
+        pthread_mutex_unlock(client->sharedData->mutexRemovedFriend);
+        pthread_mutex_lock(client->mutexRemoveNotifications);
+        if(client->numOfRemoveNotifications>0)
+        {
+            client->numOfRemoveNotifications=0;
+        }
+        pthread_mutex_unlock(client->mutexRemoveNotifications);
+    }
+
+
+
+}
+
 void onlineUserMenu(Client *client);
 
 void regLogin(Client *client) {
     char buffer[MAX_BUFFER_SIZE];
-    char *msg = "Zadaj co chces robit:\n1.Registracia\n2.Prihlasenie\nPre ukoncenie napis exit";
+    char *msg = "Zadaj co chces robit:\n1.Registracia\n2.Prihlasenie";
     write(client->sockfd, msg, strlen(msg) + 1);
     checkCorrectInput(client, "1", "2", buffer);
-
-
     msg = "Zadaj login";
     write(client->sockfd, msg, strlen(msg) + 1);
     char login[MAX_BUFFER_SIZE];
@@ -329,146 +404,34 @@ void regLogin(Client *client) {
     pthread_mutex_unlock(client->sharedData->mutexOnlineUsers);
 
     if (strcmp(buffer, "2") == 0) {
-        chceckFriendsRequests(client);
-        FILE *file;
-        char fileName[MAX_BUFFER_SIZE];
-        sprintf(fileName, "%s/%s/%sRemoveFriends.txt", pathToFiles, client->name, client->name);
-        bool opened = false;
-        pthread_mutex_lock(client->sharedData->mutexRemovedFriend);
-        if (file = fopen(fileName, "r")) {
-            opened = true;
-            char removed[MAX_BUFFER_SIZE];
-            strcpy(buffer, "Z priatelov si ta odstranili:\n");
-            while (!feof(file)) {
-                fscanf(file, "%s", removed);
-                printf("Uzivatel %s si odstranil uzivatela %s z priatelov :(\n", removed, client->name);
-                strcat(buffer, removed);
-                strcat(buffer, "\n");
-            }
-            fclose(file);
-            pthread_mutex_unlock(client->sharedData->mutexRemovedFriend);
-            remove(fileName);
-            strcat(buffer, "Pre navrat do menu stlac lubovolnu klavesu");
-            write(client->sockfd, buffer, strlen(buffer) + 1);
-            read(client->sockfd, buffer, sizeof(buffer));
-        }
-        if(!opened)
-        {
-            pthread_mutex_unlock(client->sharedData->mutexRemovedFriend);
-        }
-
+        checkFriendsRequests(client);
+        checkNewRemoval(client);
     }
     printf("Klient s loginom %s a socketom %d je pripojeny:)\n", client->name, client->sockfd);
     onlineUserMenu(client);
 
 }
 
-bool checkAlreadyInFile(pthread_mutex_t * mutex, char *fileName, char *login) {
-    FILE *file;
-    printf("Idem sa pokusit otvorit %s\n", fileName);
-    int numOfLines = countNumOfLines(fileName, mutex);
-    pthread_mutex_lock(mutex);
-    file = fopen(fileName, "r");
-    char foundLogin[MAX_BUFFER_SIZE] = "";
-    bool found = false;
 
-    if (numOfLines > 0) {
-        for (int i = 0; i < numOfLines; ++i) {
-            fscanf(file, "%s", foundLogin);
-            printf("Precital som %s\n", foundLogin);
-            if (strcmp(foundLogin, login) == 0) {
-                printf("Nasiel som %s\n", foundLogin);
-                found = true;
-                break;
-            }
 
-        }
-    }
-    fclose(file);
-    pthread_mutex_unlock(mutex);
-    printf("checkhol som subor %s\n", fileName);
-    printf("V %s result: %d\n", fileName, found);
-
-    return found;
-}
-
-bool checkAlreadyFriendsAndRequests(Client *client, char *friendName) {
-
-    char choose[MAX_BUFFER_SIZE];
-    bool exists = false;
-    pthread_mutex_lock(client->mutexAddRequests);
-    for (int i = 0; i < client->numOfAddRequests; ++i) {
-        strcpy(choose, client->addRequests + (i * MAX_BUFFER_SIZE));
-
-        if (strcmp(choose, friendName) == 0) {
-            exists = true;
-            break;
-        }
-
-    }
-    pthread_mutex_unlock(client->mutexAddRequests);
+bool checkAlreadyFriendsOrAlreadyInRequests(Client *client, char *friendName) {
 
     char friendsFile[MAX_BUFFER_SIZE];
-    char requestsFile[MAX_BUFFER_SIZE];
+    char requestsFile1[MAX_BUFFER_SIZE];
+    char requestsFile2[MAX_BUFFER_SIZE];
     sprintf(friendsFile, "%s/%s/%sFriends.txt", pathToFiles, friendName, friendName);
-    sprintf(requestsFile, "%s/%s/%sRequests.txt", pathToFiles, friendName, friendName);
+    sprintf(requestsFile1, "%s/%s/%sRequests.txt", pathToFiles, friendName, friendName);
+    sprintf(requestsFile2, "%s/%s/%sRequests.txt", pathToFiles, client->name, client->name);
 
-    printf("Idem skontrolovat ci uzivatel %s uz neziadal %s\n", friendName, client->name);
-    printf("Skontrolovane online requesty uzivatela %s, najdeny request od uzivatela %s: %d\n", client->name,
-           friendName, exists);
-    printf("Idem skontrolovat subor %s ci sa v nom nachadza uzivatel %s\n", requestsFile, client->name);
 
+    printf("Idem skontrolovat subor %s ci sa v nom nachadza uzivatel %s\n", requestsFile1, client->name);
+    printf("Idem skontrolovat subor %s ci sa v nom nachadza uzivatel %s\n", requestsFile2, friendName);
     printf("Idem skontrolovat subor %s ci sa v nom nachadza uzivatel %s\n", friendsFile, client->name);
 
 
-    return exists || checkAlreadyInFile(client->sharedData->mutexFriends, friendsFile, client->name) || checkAlreadyInFile(client->sharedData->mutexRequests, requestsFile, client->name);
-}
-
-
-void checkNewAddRequests(Client *client) {
-    char choose[MAX_BUFFER_SIZE];
-    pthread_mutex_lock(client->mutexAddRequests);
-    printf("Pocet cakajucich ziadosti o priatelstvo uzivatela %s je %d\n", client->name, client->numOfAddRequests);
-    for (int i = 0; i < client->numOfAddRequests; ++i) {
-        strcpy(choose, client->addRequests + (i * MAX_BUFFER_SIZE));
-
-        pthread_mutex_unlock(client->mutexAddRequests);
-        if (checkAlreadyFriendsAndRequests(client, choose)) {
-            acceptFriendRequest(client, client->name, choose);
-        }
-        pthread_mutex_lock(client->mutexAddRequests);
-    }
-    printf("Aktualny pocet ziadosti o priatelstvo uzivatela %s je %d\n", client->name, client->numOfAddRequests);
-    client->numOfAddRequests = 0;
-    bzero(client->addRequests, MAX_BUFFER_SIZE * MAX_INBOX_SIZE);
-    pthread_mutex_unlock(client->mutexAddRequests);
-
-
-}
-
-void checkNewRemoval(Client *client) {
-    char user[MAX_BUFFER_SIZE];
-    char msg[MAX_BUFFER_SIZE];
-    strcpy(msg, "Nasledovny uzivatelia si vas odstranili z priatelov:");
-
-    pthread_mutex_lock(client->mutexRemoveNotifications);
-    printf("Uzivatel %s si ide skontrolovat ci si ho niekto odstranil z priatelov\n", client->name);
-    printf("Uzivatela %s si odstranilo %d uzivatelov su to:\n", client->name, client->numOfRemoveNotifications);
-
-    for (int i = 0; i < client->numOfRemoveNotifications; ++i) {
-        strcpy(user, client->removeNotifications + (i * MAX_BUFFER_SIZE));
-        printf("%s\n", user);
-        strcat(msg, "\n");
-        strcat(msg, user);
-    }
-    client->numOfRemoveNotifications = 0;
-    bzero(client->removeNotifications, MAX_BUFFER_SIZE * MAX_INBOX_SIZE);
-    pthread_mutex_unlock(client->mutexRemoveNotifications);
-
-    strcat(msg, "\nPre navrat do menu stlac lubovolnu klavesu");
-    write(client->sockfd, msg, strlen(msg) + 1);
-    read(client->sockfd, user, strlen(user) + 1);
-
+    return checkAlreadyInFile(client->sharedData->mutexFriends, friendsFile, client->name) ||
+           checkAlreadyInFile(client->sharedData->mutexRequests, requestsFile1, client->name) ||
+           checkAlreadyInFile(client->sharedData->mutexRequests, requestsFile2, friendName);
 }
 
 bool isOnline(Client *client, char *name, int *index) {
@@ -489,21 +452,19 @@ bool isOnline(Client *client, char *name, int *index) {
 void logout(Client *client) {
 
     pthread_mutex_lock(client->mutexRemoveNotifications);
-    bool hasNotifications=false;
+    bool hasNotifications=client->numOfRemoveNotifications > 0;
     printf("Uzivatela %s si %d ludi odstranilo z priatelov\n", client->name, client->numOfRemoveNotifications);
-    if (client->numOfRemoveNotifications > 0) {
-        hasNotifications=true;
-        pthread_mutex_unlock(client->mutexRemoveNotifications);
+    pthread_mutex_unlock(client->mutexRemoveNotifications);
+    if (hasNotifications) {
         checkNewRemoval(client);
     }
-    if(!hasNotifications)
-    {
-        pthread_mutex_unlock(client->mutexRemoveNotifications);
-    }
 
+    pthread_mutex_lock(client->mutexRemoveNotifications);
+    hasNotifications=client->numOfAddRequests > 0;
     printf("Uzivatel %s ma %d ziadosti o priatelstvo\n", client->name, client->numOfAddRequests);
-    if (client->numOfAddRequests > 0) {
-        checkNewAddRequests(client);
+    pthread_mutex_unlock(client->mutexRemoveNotifications);
+    if (hasNotifications) {
+        checkFriendsRequests(client);
     }
 
     int index = -1;
@@ -512,8 +473,12 @@ void logout(Client *client) {
     arraylist_remove(client->sharedData->onlineUsers, index);
     pthread_mutex_unlock(client->sharedData->mutexOnlineUsers);
     printf("Uzivatel s loginom %s a socketom %d sa odhlasil\n", client->name, client->sockfd);
+
+    char * msg="exit";
+    write(client->sockfd,msg,strlen(msg)+1);
+    close(client->sockfd);
+    printf("Zavrel som socket klienta s cislom %d\n",client->sockfd);
     free(client);
-    regLogin(client);
 
 }
 
@@ -557,9 +522,6 @@ void removeLineFromFile(char *remLogin, char *fileName, bool removeFriend,pthrea
     {
         pthread_mutex_unlock(mutex);
     }
-
-
-
     remove(fileName);
     rename(tmpFileName, fileName);
 }
@@ -579,8 +541,8 @@ void removeAccount(Client *client) {
 
     printf("Idem odstranit uzivatela %s\n", client->name);
     char fileName[MAX_BUFFER_SIZE];
-    sprintf(fileName, "%s/%s/%sFriends.txt", pathToFiles, client->name, client->name);
-    removeLineFromFile(client->name, fileName, false,client->sharedData->mutexFriends);
+    sprintf(fileName, "%s/chatUsers.txt", pathToFiles);
+    removeLineFromFile(client->name, fileName, false,client->sharedData->mutexRegisteredUsers);
     sprintf(fileName, "%s/%s/%sFriends.txt", pathToFiles, client->name, client->name);
     int numOfFriends = countNumOfLines(fileName, client->sharedData->mutexFriends);
     pthread_mutex_lock(client->sharedData->mutexFriends);
@@ -589,26 +551,32 @@ void removeAccount(Client *client) {
     char friend[MAX_BUFFER_SIZE];
     for (int i = 0; i < numOfFriends; ++i) {
         fscanf(file, "%s", friend);
+        pthread_mutex_unlock(client->sharedData->mutexFriends);
         removeUserFromFriends(friend, client->name,client->sharedData->mutexFriends);
+        pthread_mutex_lock(client->sharedData->mutexFriends);
     }
     fclose(file);
     pthread_mutex_unlock(client->sharedData->mutexFriends);
     remove(fileName);
+
     int index = -1;
     isOnline(client, client->name, &index);
     pthread_mutex_lock(client->sharedData->mutexOnlineUsers);
     arraylist_remove(client->sharedData->onlineUsers, index);
     pthread_mutex_unlock(client->sharedData->mutexOnlineUsers);
-    sprintf(fileName, "%s/%s/%sRequests.txt", pathToFiles, client->name, client->name);
-    remove(fileName);
-    sprintf(fileName, "%s/%s/%sMessages.txt", pathToFiles, client->name, client->name);
-    remove(fileName);
+
     sprintf(fileName, "%s/%s", pathToFiles, client->name);
-    rmdir(fileName);
+    char cmd[MAX_BUFFER_SIZE];
+    sprintf(cmd, "rm -rf %s", fileName);
+    system(cmd);
     printf("Odstranil som uzivatela %s a vsetky jeho subory spolu s priecinkom\n", client->name);
 
-    free(client->name);
-    regLogin(client);
+    char * msg="exit";
+    write(client->sockfd,msg,strlen(msg)+1);
+    close(client->sockfd);
+    printf("Zavrel som socket klienta s cislom %d\n",client->sockfd);
+    free(client);
+
 
 }
 
@@ -634,55 +602,53 @@ void addFriend(Client *client) {
     }
 
     printUsers(client, fileName, choose, 3, client->sharedData->mutexRegisteredUsers);
-
-
-    int index = -1;
-    if (isOnline(client, choose, &index)) {
-        pthread_mutex_lock(client->sharedData->mutexOnlineUsers);
-        Client *choosenUser = arraylist_get(client->sharedData->onlineUsers, index);
-        pthread_mutex_unlock(client->sharedData->mutexOnlineUsers);
-        printf("Pocet novych ziadosti o priatelstvo uzivatela %s je  %d\n", client->name, client->numOfAddRequests);
-        printf("Idem skontrolovat ci uzivatel %s uz ziadal uzivatela %s o priatelstvo\n", client->name, choosenUser->name);
-        pthread_mutex_lock(client->mutexAddRequests);
-        bool inboxFull = (choosenUser->numOfAddRequests < MAX_INBOX_SIZE);
-        pthread_mutex_unlock(client->mutexAddRequests);
-        if (inboxFull ||!checkAlreadyFriendsAndRequests(choosenUser, client->name)) {
+    if(strcmp(choose, "1") != 0)
+    {
+        int index = -1;
+        bool print=true;
+        if (isOnline(client, choose, &index)) {
+            print=false;
+            pthread_mutex_lock(client->sharedData->mutexOnlineUsers);
+            Client *choosenUser = arraylist_get(client->sharedData->onlineUsers, index);
+            pthread_mutex_unlock(client->sharedData->mutexOnlineUsers);
+            printf("Pocet novych ziadosti o priatelstvo uzivatela %s je  %d\n", client->name, client->numOfAddRequests);
+            printf("Idem skontrolovat ci uzivatel %s uz ziadal uzivatela %s o priatelstvo\n", client->name,choosenUser->name);
             printf("Uzivatel %s este neziadal uzivatela %s o priatelstvo", client->name, choosenUser->name);
-            pthread_mutex_lock(client->mutexAddRequests);
-            strcpy(choosenUser->addRequests + (choosenUser->numOfAddRequests * MAX_BUFFER_SIZE), client->name);
 
-            printf("Uzivatel %s si pridal do ziadosti o priatelstvo uzivatela %s\n", choosenUser->name, choosenUser->addRequests);
-            (choosenUser->numOfAddRequests)++;
-            pthread_mutex_unlock(client->mutexAddRequests);
+            char requestFileName[MAX_BUFFER_SIZE];
+            sprintf(requestFileName,"%s/%s/%sRequests.txt",pathToFiles,client->name,client->name);
+            if(!checkAlreadyInFile(client->sharedData->mutexRequests,requestFileName,choosenUser->name))
+            {
+                print=true;
+                pthread_mutex_lock(client->mutexAddRequests);
+                printf("Uzivatel %s si pridal do ziadosti o priatelstvo uzivatela %s\n", client->name,choosenUser->name);
+                (choosenUser->numOfAddRequests)++;
+                pthread_mutex_unlock(client->mutexAddRequests);
 
-        } else {
-            printf("Uzivatelovi %s nie je mozne poslat ziadost\n", choose);
-            strcpy(msg,
-                   "Uzivatelovi nie je mozne poslat ziadost, vyber si ako chces pokracovat\n1.Spat do menu\n2.Poslat ziadost inemu uzivatelovi");
-            write(client->sockfd, msg, strlen(msg) + 1);
-            read(choosenUser->sockfd, choose, sizeof(choose));
-            if (strcmp(choose, "1") == 0) {
-                onlineUserMenu(client);
-            } else {
-                addFriend(client);
             }
-
+            else
+            {
+                checkFriendsRequests(client);
+                onlineUserMenu(client);
+            }
         }
-
-
-    } else {
-        char sender[MAX_BUFFER_SIZE];
-        strcpy(sender, client->name);
-        FILE *choosenFile;
-        sprintf(fileName, "%s/%s/%sRequests.txt", pathToFiles, choose, choose);
-        pthread_mutex_lock(client->sharedData->mutexRequests);
-        choosenFile = fopen(fileName, "a");
-        fprintf(choosenFile, "%s\n", sender);
-        fclose(choosenFile);
-        pthread_mutex_unlock(client->sharedData->mutexRequests);
+        if(print)
+        {
+            char sender[MAX_BUFFER_SIZE];
+            strcpy(sender, client->name);
+            FILE *choosenFile;
+            sprintf(fileName, "%s/%s/%sRequests.txt", pathToFiles, choose, choose);
+            pthread_mutex_lock(client->sharedData->mutexRequests);
+            choosenFile = fopen(fileName, "a");
+            fprintf(choosenFile, "%s\n", sender);
+            fclose(choosenFile);
+            pthread_mutex_unlock(client->sharedData->mutexRequests);
+            printf("Uzivatel %s poslal uzivatelovi %s ziadost o priatelstvo\n", client->name, choose);
+            onlineUserMenu(client);
+        }
     }
-    printf("Uzivatel %s poslal uzivatelovi %s ziadost o priatelstvo\n", client->name, choose);
-    onlineUserMenu(client);
+
+
 
 }
 
@@ -709,7 +675,9 @@ void printUsers(Client *client, char *fileName, char *contact, int funOption, pt
             printf("Porovnavam %s a %s\n", user, client->name);
 
             pthread_mutex_unlock(mutex);
-            if (strcmp(user, client->name) != 0 && !checkAlreadyFriendsAndRequests(client, user))
+            char requestFile[MAX_BUFFER_SIZE];
+            sprintf(requestFile,"%s/%s/%sRequests.txt",pathToFiles,user,user);
+            if (strcmp(user, client->name) != 0 && !checkAlreadyFriendsOrAlreadyInRequests(client, user))
             {
                 printf("Uzivatel %s nema este uzivatela %s v priateloch\n", user, client->name);
                 print = true;
@@ -738,9 +706,7 @@ void printUsers(Client *client, char *fileName, char *contact, int funOption, pt
         pthread_mutex_unlock(mutex);
     }
     write(client->sockfd, message, strlen(message) + 1);
-
     strcat(message,"\nZadaneho uzivatela nie je mozne zvolit, vyber si niekoho z vyssie zadanych alebo klikni 1 pre navrat do menu.");
-
     bool done = false;
     while (!done) {
         read(client->sockfd, buffer, sizeof(buffer));
@@ -791,11 +757,14 @@ void removeFriend(Client *client) {
     FILE *friendsFile;
     if (removingUser) {
         pthread_mutex_lock(removingUser->mutexRemoveNotifications);
-        strcpy(removingUser->removeNotifications + removingUser->numOfRemoveNotifications * MAX_BUFFER_SIZE,client->name);
         printf("Uzivatel %s je online a tak sa mu notifikacia o tom ze si ho niekto odstranil z priatelov zapisala do pola\n", removingUser->name);
         removingUser->numOfRemoveNotifications++;
         pthread_mutex_unlock(removingUser->mutexRemoveNotifications);
-    } else {
+    }
+
+    sprintf(fileName, "%s/%s/%sFriends.txt", pathToFiles, client->name, client->name);
+    if(checkAlreadyInFile(client->sharedData->mutexFriends,fileName,friend))
+    {
         sprintf(fileName, "%s/%s/%sRemoveFriends.txt", pathToFiles, friend, friend);
         pthread_mutex_lock(client->sharedData->mutexRemovedFriend);
         friendsFile = fopen(fileName, "a");
@@ -803,11 +772,16 @@ void removeFriend(Client *client) {
         fclose(friendsFile);
         pthread_mutex_unlock(client->sharedData->mutexRemovedFriend);
         printf("Uzivatel %s je offline a tak sa mu uzivatel, ktory si ho odstranil zo zoznamu priatelov zapisal do suboru %s\n", friend, fileName);
+
+        removeUserFromFriends(client->name, friend,client->sharedData->mutexFriends);
+        removeUserFromFriends(friend, client->name,client->sharedData->mutexFriends);
+        printf("Uzivatel %s si odstranil uzivatela %s z priatelov\n", client->name, friend);
+    }
+    else
+    {
+        checkNewRemoval(client);
     }
 
-    removeUserFromFriends(client->name, friend,client->sharedData->mutexFriends);
-    removeUserFromFriends(friend, client->name,client->sharedData->mutexFriends);
-    printf("Uzivatel %s si odstranil uzivatela %s z priatelov\n", client->name, friend);
     onlineUserMenu(client);
 }
 
@@ -918,7 +892,7 @@ void getFileName(char *fileName, char *result) {
         strcpy(result, dump);
         printf("token:%s\n", dump);
     }
-    printf("NEW FILE NAME %s\n", result);
+    printf("Nazov suboru%s\n", result);
 
 }
 
@@ -972,7 +946,6 @@ void sendFile(Client *client) {
     read(client->sockfd, buffer, sizeof(buffer));
     printf("Uzivatel %s si vybral subor a cesta k nemu je %s\n", client->name, buffer);
 
-
     char sendFileName[MAX_BUFFER_SIZE];
     strcpy(sendFileName, buffer);
     char friendsFileName[MAX_BUFFER_SIZE];
@@ -986,7 +959,6 @@ void sendFile(Client *client) {
     char originalFileName[MAX_BUFFER_SIZE];
     strcpy(originalFileName, sendFileName);
     getFileName(sendFileName, name);
-
     char pathToNewFile[MAX_BUFFER_SIZE];
     sprintf(pathToNewFile, "%s/%s/%s", pathToFiles, buffer, name);
     copyFileContent(originalFileName, pathToNewFile, client->sharedData->mutexSendFile);
@@ -1074,21 +1046,19 @@ void makeGroup(Client *client) {
 void onlineUserMenu(Client *client) {
 
     pthread_mutex_lock(client->mutexRemoveNotifications);
-    bool hasNotifications=false;
+    bool hasNotifications=client->numOfRemoveNotifications > 0;
     printf("Uzivatela %s si %d ludi odstranilo z priatelov\n", client->name, client->numOfRemoveNotifications);
-    if (client->numOfRemoveNotifications > 0) {
-        hasNotifications=true;
-        pthread_mutex_unlock(client->mutexRemoveNotifications);
+    pthread_mutex_unlock(client->mutexRemoveNotifications);
+    if (hasNotifications) {
         checkNewRemoval(client);
     }
-    if(!hasNotifications)
-    {
-        pthread_mutex_unlock(client->mutexRemoveNotifications);
-    }
 
+    pthread_mutex_lock(client->mutexRemoveNotifications);
+    hasNotifications=client->numOfAddRequests > 0;
     printf("Uzivatel %s ma %d ziadosti o priatelstvo\n", client->name, client->numOfAddRequests);
-    if (client->numOfAddRequests > 0) {
-        checkNewAddRequests(client);
+    pthread_mutex_unlock(client->mutexRemoveNotifications);
+    if (hasNotifications) {
+        checkFriendsRequests(client);
     }
 
     char option[MAX_BUFFER_SIZE];
@@ -1126,7 +1096,6 @@ void *serverDone(void *pdata)
     ServerEnd * dataS = pdata;
     while (true)
     {
-
         char buffer[MAX_BUFFER_SIZE];
         bzero(buffer, MAX_BUFFER_SIZE);
         fgets(buffer, MAX_BUFFER_SIZE, stdin);
@@ -1180,9 +1149,8 @@ int startServer(int argc, char *argv[]) {
 
     S_DATA shared= {onlineUsers,&mutexOnlineUsers,&mutexRegisteredUsers,&mutexRequests,&mutexFriends,&mutexMessages,&mutexRemovedFriend, &mutexSendFile};
     bool done = false;
-    ServerEnd sEnd = {done};
     initListeningSocket(&port, &listenfd, &serv_addr);
-
+    ServerEnd sEnd = {done};
     int id = 0;
     pthread_t client, serverEnd;
     pthread_create(&serverEnd, NULL, serverDone, &sEnd);
@@ -1192,8 +1160,12 @@ int startServer(int argc, char *argv[]) {
     while (!sEnd.done) {
         initConnSocket(&listenfd, &connfd, &cli_addr);
         printf("Joinul som sa s clientom\n");
+        if(sEnd.done)
+        {
+            char * msg="exit";
+            write(connfd, msg, strlen(msg)+1);
+        }
         Client *newClient = (Client *) malloc(sizeof(Client));
-        newClient->id = id++;
         newClient->sockfd = connfd;
         newClient->cl_address = cli_addr;
         newClient->numOfAddRequests = 0;
@@ -1203,12 +1175,9 @@ int startServer(int argc, char *argv[]) {
         newClient->sharedData = &shared;
         pthread_create(&client, NULL, handleClient, newClient);
         pthread_detach(client);
-
-        //pthread_join(serverEnd, NULL);
-
         printf("server je %d\n", sEnd.done);
-
     }
+
 
     for (int i = 0; i < arraylist_size(onlineUsers); ++i)
     {
@@ -1217,6 +1186,7 @@ int startServer(int argc, char *argv[]) {
     }
 
 
+    close(listenfd);
     arraylist_destroy(onlineUsers);
     pthread_mutex_destroy(&mutexOnlineUsers);
     pthread_mutex_destroy(&mutexRegisteredUsers);
@@ -1227,9 +1197,7 @@ int startServer(int argc, char *argv[]) {
     pthread_mutex_destroy(&mutexSendFile);
     pthread_mutex_destroy(&mutexAddRequests);
     pthread_mutex_destroy(&mutexRemoveNotifications);
-    close(connfd);
-    printf("Zavrel som connfd\n");
-    close(listenfd);
+
     printf("Zavrel som listen\n");
     return 0;
 

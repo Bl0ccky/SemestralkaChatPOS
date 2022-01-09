@@ -67,11 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-
-CMAKE_SOURCE_DIR = /tmp/tmp.zGIpnpzV5n
+CMAKE_SOURCE_DIR = /tmp/tmp.ndYDge5mJo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.zGIpnpzV5n/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.ndYDge5mJo/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,11 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles /tmp/tmp.zGIpnpzV5n/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles /tmp/tmp.ndYDge5mJo/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles 0
-
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -133,7 +130,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-
 # Target rules for targets named SemestrakaChatPOS
 
 # Build rule for target.
@@ -146,16 +142,13 @@ SemestrakaChatPOS/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/build
 .PHONY : SemestrakaChatPOS/fast
 
-
 arrayList.o: arrayList.c.o
 
 .PHONY : arrayList.o
 
 # target to build an object file
 arrayList.c.o:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o
-
 .PHONY : arrayList.c.o
 
 arrayList.i: arrayList.c.i
@@ -164,9 +157,7 @@ arrayList.i: arrayList.c.i
 
 # target to preprocess a source file
 arrayList.c.i:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.i
-
 .PHONY : arrayList.c.i
 
 arrayList.s: arrayList.c.s
@@ -175,9 +166,7 @@ arrayList.s: arrayList.c.s
 
 # target to generate assembly for a file
 arrayList.c.s:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.s
-
 .PHONY : arrayList.c.s
 
 client.o: client.c.o
@@ -186,9 +175,7 @@ client.o: client.c.o
 
 # target to build an object file
 client.c.o:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/client.c.o
-
 .PHONY : client.c.o
 
 client.i: client.c.i
@@ -197,9 +184,7 @@ client.i: client.c.i
 
 # target to preprocess a source file
 client.c.i:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/client.c.i
-
 .PHONY : client.c.i
 
 client.s: client.c.s
@@ -208,9 +193,7 @@ client.s: client.c.s
 
 # target to generate assembly for a file
 client.c.s:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/client.c.s
-
 .PHONY : client.c.s
 
 main.o: main.c.o
@@ -219,9 +202,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/main.c.o
-
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -230,9 +211,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/main.c.i
-
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -241,9 +220,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/main.c.s
-
 .PHONY : main.c.s
 
 server.o: server.c.o
@@ -252,9 +229,7 @@ server.o: server.c.o
 
 # target to build an object file
 server.c.o:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/server.c.o
-
 .PHONY : server.c.o
 
 server.i: server.c.i
@@ -263,9 +238,7 @@ server.i: server.c.i
 
 # target to preprocess a source file
 server.c.i:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/server.c.i
-
 .PHONY : server.c.i
 
 server.s: server.c.s
@@ -274,9 +247,7 @@ server.s: server.c.s
 
 # target to generate assembly for a file
 server.c.s:
-
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestrakaChatPOS.dir/build.make CMakeFiles/SemestrakaChatPOS.dir/server.c.s
-
 .PHONY : server.c.s
 
 # Help Target
@@ -287,9 +258,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-
 	@echo "... SemestrakaChatPOS"
-
 	@echo "... arrayList.o"
 	@echo "... arrayList.i"
 	@echo "... arrayList.s"

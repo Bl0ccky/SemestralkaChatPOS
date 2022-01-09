@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.zGIpnpzV5n
+CMAKE_SOURCE_DIR = /tmp/tmp.ndYDge5mJo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.zGIpnpzV5n/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.ndYDge5mJo/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SemestrakaChatPOS.dir/depend.make
@@ -78,55 +78,55 @@ include CMakeFiles/SemestrakaChatPOS.dir/flags.make
 
 CMakeFiles/SemestrakaChatPOS.dir/main.c.o: CMakeFiles/SemestrakaChatPOS.dir/flags.make
 CMakeFiles/SemestrakaChatPOS.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SemestrakaChatPOS.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/main.c.o -c /tmp/tmp.zGIpnpzV5n/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SemestrakaChatPOS.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/main.c.o -c /tmp/tmp.ndYDge5mJo/main.c
 
 CMakeFiles/SemestrakaChatPOS.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SemestrakaChatPOS.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.zGIpnpzV5n/main.c > CMakeFiles/SemestrakaChatPOS.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.ndYDge5mJo/main.c > CMakeFiles/SemestrakaChatPOS.dir/main.c.i
 
 CMakeFiles/SemestrakaChatPOS.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SemestrakaChatPOS.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.zGIpnpzV5n/main.c -o CMakeFiles/SemestrakaChatPOS.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.ndYDge5mJo/main.c -o CMakeFiles/SemestrakaChatPOS.dir/main.c.s
 
 CMakeFiles/SemestrakaChatPOS.dir/client.c.o: CMakeFiles/SemestrakaChatPOS.dir/flags.make
 CMakeFiles/SemestrakaChatPOS.dir/client.c.o: ../client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SemestrakaChatPOS.dir/client.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/client.c.o -c /tmp/tmp.zGIpnpzV5n/client.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SemestrakaChatPOS.dir/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/client.c.o -c /tmp/tmp.ndYDge5mJo/client.c
 
 CMakeFiles/SemestrakaChatPOS.dir/client.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SemestrakaChatPOS.dir/client.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.zGIpnpzV5n/client.c > CMakeFiles/SemestrakaChatPOS.dir/client.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.ndYDge5mJo/client.c > CMakeFiles/SemestrakaChatPOS.dir/client.c.i
 
 CMakeFiles/SemestrakaChatPOS.dir/client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SemestrakaChatPOS.dir/client.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.zGIpnpzV5n/client.c -o CMakeFiles/SemestrakaChatPOS.dir/client.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.ndYDge5mJo/client.c -o CMakeFiles/SemestrakaChatPOS.dir/client.c.s
 
 CMakeFiles/SemestrakaChatPOS.dir/server.c.o: CMakeFiles/SemestrakaChatPOS.dir/flags.make
 CMakeFiles/SemestrakaChatPOS.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SemestrakaChatPOS.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/server.c.o -c /tmp/tmp.zGIpnpzV5n/server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SemestrakaChatPOS.dir/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/server.c.o -c /tmp/tmp.ndYDge5mJo/server.c
 
 CMakeFiles/SemestrakaChatPOS.dir/server.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SemestrakaChatPOS.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.zGIpnpzV5n/server.c > CMakeFiles/SemestrakaChatPOS.dir/server.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.ndYDge5mJo/server.c > CMakeFiles/SemestrakaChatPOS.dir/server.c.i
 
 CMakeFiles/SemestrakaChatPOS.dir/server.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SemestrakaChatPOS.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.zGIpnpzV5n/server.c -o CMakeFiles/SemestrakaChatPOS.dir/server.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.ndYDge5mJo/server.c -o CMakeFiles/SemestrakaChatPOS.dir/server.c.s
 
 CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o: CMakeFiles/SemestrakaChatPOS.dir/flags.make
 CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o: ../arrayList.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o -c /tmp/tmp.zGIpnpzV5n/arrayList.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o -c /tmp/tmp.ndYDge5mJo/arrayList.c
 
 CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.zGIpnpzV5n/arrayList.c > CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.ndYDge5mJo/arrayList.c > CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.i
 
 CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.zGIpnpzV5n/arrayList.c -o CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.ndYDge5mJo/arrayList.c -o CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.s
 
 # Object files for target SemestrakaChatPOS
 SemestrakaChatPOS_OBJECTS = \
@@ -144,7 +144,7 @@ SemestrakaChatPOS: CMakeFiles/SemestrakaChatPOS.dir/server.c.o
 SemestrakaChatPOS: CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o
 SemestrakaChatPOS: CMakeFiles/SemestrakaChatPOS.dir/build.make
 SemestrakaChatPOS: CMakeFiles/SemestrakaChatPOS.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable SemestrakaChatPOS"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable SemestrakaChatPOS"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SemestrakaChatPOS.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -157,6 +157,6 @@ CMakeFiles/SemestrakaChatPOS.dir/clean:
 .PHONY : CMakeFiles/SemestrakaChatPOS.dir/clean
 
 CMakeFiles/SemestrakaChatPOS.dir/depend:
-	cd /tmp/tmp.zGIpnpzV5n/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.zGIpnpzV5n /tmp/tmp.zGIpnpzV5n /tmp/tmp.zGIpnpzV5n/cmake-build-debug /tmp/tmp.zGIpnpzV5n/cmake-build-debug /tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/DependInfo.cmake --color=$(COLOR)
+	cd /tmp/tmp.ndYDge5mJo/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.ndYDge5mJo /tmp/tmp.ndYDge5mJo /tmp/tmp.ndYDge5mJo/cmake-build-debug /tmp/tmp.ndYDge5mJo/cmake-build-debug /tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SemestrakaChatPOS.dir/depend
 
