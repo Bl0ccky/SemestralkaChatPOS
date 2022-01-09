@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/tmp/tmp.zGIpnpzV5n/arrayList.c" "/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o"
-  "/tmp/tmp.zGIpnpzV5n/client.c" "/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/client.c.o"
-  "/tmp/tmp.zGIpnpzV5n/main.c" "/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/main.c.o"
-  "/tmp/tmp.zGIpnpzV5n/server.c" "/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/server.c.o"
+  "/tmp/tmp.ndYDge5mJo/arrayList.c" "/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o"
+  "/tmp/tmp.ndYDge5mJo/client.c" "/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/client.c.o"
+  "/tmp/tmp.ndYDge5mJo/main.c" "/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/main.c.o"
+  "/tmp/tmp.ndYDge5mJo/server.c" "/tmp/tmp.ndYDge5mJo/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
