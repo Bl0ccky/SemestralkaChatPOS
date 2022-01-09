@@ -61,21 +61,23 @@ int startClient(int argc, char *argv[])
     {
         bzero(buffer,MAX_BUFFER_SIZE);
         read(sockfd, buffer, MAX_BUFFER_SIZE);
-        printf("%s\n",buffer);
-        bzero(buffer,MAX_BUFFER_SIZE);
-        fgets(buffer, MAX_BUFFER_SIZE, stdin);
-        buffer[strcspn(buffer, "\n")] = 0;
-        printf("Zadal si:%s\n",buffer);
-
         if(strcmp(buffer, "exit") == 0)
         {
             break;
         }
+        printf("%s\n",buffer);
+        bzero(buffer,MAX_BUFFER_SIZE);
+        fgets(buffer, MAX_BUFFER_SIZE, stdin);
+        buffer[strcspn(buffer, "\n")] = 0;
+
+        printf("Zadal si:%s\n",buffer);
         write(sockfd, buffer, strlen (buffer)+1);
+
 
 
     }
 
+    write(sockfd, buffer, strlen (buffer)+1);
     printf("Zavrel som socketClienta\n");
     close(sockfd);
 

@@ -12,8 +12,7 @@
 #ifndef CHAT_SERVER_H
 #define CHAT_SERVER_H
 
-#define MAX_INBOX_SIZE 10
-#define MAX_BUFFER_SIZE 512
+#define MAX_BUFFER_SIZE 256
 #define MAX_NAME_SIZE 256
 
 typedef struct sharedData{
@@ -34,8 +33,6 @@ typedef struct
     int sockfd;
     int id;
     char name[MAX_NAME_SIZE];
-    char addRequests[MAX_INBOX_SIZE*MAX_BUFFER_SIZE];
-    char removeNotifications[MAX_INBOX_SIZE*MAX_BUFFER_SIZE];
     int numOfRemoveNotifications;
     int numOfAddRequests;
     pthread_mutex_t * mutexAddRequests;
