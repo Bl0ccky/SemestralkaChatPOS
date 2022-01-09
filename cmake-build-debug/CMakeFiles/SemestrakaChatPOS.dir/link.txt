@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/SemestrakaChatPOS.dir/main.c.o CMakeFiles/SemestrakaChatPOS.dir/client.c.o CMakeFiles/SemestrakaChatPOS.dir/server.c.o CMakeFiles/SemestrakaChatPOS.dir/arrayList.c.o -o SemestrakaChatPOS  -lpthread 

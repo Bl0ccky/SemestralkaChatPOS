@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="Remote Host (9aedab9c-f76a-4fc8-9b8c-dee49d70513b)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="frios (5f814666-aedf-4d41-bb70-25d3f5e7d7c5)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.zGIpnpzV5n" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
