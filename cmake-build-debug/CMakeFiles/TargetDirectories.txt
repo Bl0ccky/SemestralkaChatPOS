@@ -1,3 +1,5 @@
-/tmp/tmp.cTOMp4eHKu/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/tmp/tmp.cTOMp4eHKu/cmake-build-debug/CMakeFiles/edit_cache.dir
-/tmp/tmp.cTOMp4eHKu/cmake-build-debug/CMakeFiles/SemestralkaChatPOS.dir
+
+/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/edit_cache.dir
+/tmp/tmp.zGIpnpzV5n/cmake-build-debug/CMakeFiles/SemestrakaChatPOS.dir
+

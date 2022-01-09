@@ -1,7 +1,9 @@
 #include <sys/stat.h>
 #include "server.h"
 
-char *pathToFiles = "/home/labat2/SemestralkaChat";
+
+char *pathToFiles = "/home/sinalova4/SemestralkaChat";
+
 
 Client *getClient(arraylist *array, char *name) {
 
@@ -736,8 +738,9 @@ void printUsers(Client *client, char *fileName, char *contact, int funOption, pt
         pthread_mutex_unlock(mutex);
     }
     write(client->sockfd, message, strlen(message) + 1);
-    strcat(message,
-           "\nZadaneho uzivatela nemas v priateloch, vyber si niekoho z vyssie zadanych alebo klikni 1 pre navrat do menu.");
+
+    strcat(message,"\nZadaneho uzivatela nie je mozne zvolit, vyber si niekoho z vyssie zadanych alebo klikni 1 pre navrat do menu.");
+
     bool done = false;
     while (!done) {
         read(client->sockfd, buffer, sizeof(buffer));
@@ -969,25 +972,21 @@ void sendFile(Client *client) {
     read(client->sockfd, buffer, sizeof(buffer));
     printf("Uzivatel %s si vybral subor a cesta k nemu je %s\n", client->name, buffer);
 
-    char fileName[MAX_BUFFER_SIZE];
-    strcpy(fileName, buffer);
 
-    strcpy(msg, "Zadaj meno uzivatela, ktoremu chces poslat subor:");
-    write(client->sockfd, msg, strlen(msg) + 1);
-    strcat(msg, "\nZadaj uzivatela,ktory existuje!");
-    read(client->sockfd, buffer, sizeof(buffer));
-    char password[MAX_BUFFER_SIZE];
-    while (!checkExistingUser(client, buffer, password)) {
-        write(client->sockfd, msg, strlen(msg) + 1);
-        read(client->sockfd, buffer, sizeof(buffer));
-    }
+    char sendFileName[MAX_BUFFER_SIZE];
+    strcpy(sendFileName, buffer);
+    char friendsFileName[MAX_BUFFER_SIZE];
+    sprintf(friendsFileName,"%s/%s/%sFriends.txt",pathToFiles,client->name,client->name);
+
+    printUsers(client,friendsFileName,buffer,5,client->sharedData->mutexFriends);
 
     printf("Uzivatel %s si vybral ze chce poslat subor uzivatelovi %s\n", client->name, buffer);
-    checkFile(client, fileName);
+    checkFile(client, sendFileName);
     char name[MAX_BUFFER_SIZE];
     char originalFileName[MAX_BUFFER_SIZE];
-    strcpy(originalFileName, fileName);
-    getFileName(fileName, name);
+    strcpy(originalFileName, sendFileName);
+    getFileName(sendFileName, name);
+
     char pathToNewFile[MAX_BUFFER_SIZE];
     sprintf(pathToNewFile, "%s/%s/%s", pathToFiles, buffer, name);
     copyFileContent(originalFileName, pathToNewFile, client->sharedData->mutexSendFile);
@@ -1187,6 +1186,9 @@ int startServer(int argc, char *argv[]) {
     int id = 0;
     pthread_t client, serverEnd;
     pthread_create(&serverEnd, NULL, serverDone, &sEnd);
+
+    pthread_detach(serverEnd);
+
     while (!sEnd.done) {
         initConnSocket(&listenfd, &connfd, &cli_addr);
         printf("Joinul som sa s clientom\n");
@@ -1201,7 +1203,9 @@ int startServer(int argc, char *argv[]) {
         newClient->sharedData = &shared;
         pthread_create(&client, NULL, handleClient, newClient);
         pthread_detach(client);
-        pthread_join(serverEnd, NULL);
+
+        //pthread_join(serverEnd, NULL);
+
         printf("server je %d\n", sEnd.done);
 
     }

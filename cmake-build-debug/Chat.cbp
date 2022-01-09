@@ -8,38 +8,40 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/tmp/tmp.cTOMp4eHKu/cmake-build-debug"/>
+
+				<Option working_dir="/tmp/tmp.5TDpTqwwZt/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/tmp/tmp.cTOMp4eHKu/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.5TDpTqwwZt/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/tmp/tmp.cTOMp4eHKu/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.5TDpTqwwZt/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Chat">
-				<Option output="/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Chat" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.cTOMp4eHKu/cmake-build-debug"/>
+			<Target title="SemestrakaChatPOS">
+				<Option output="/tmp/tmp.5TDpTqwwZt/cmake-build-debug/SemestrakaChatPOS" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.5TDpTqwwZt/cmake-build-debug"/>
+
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -50,15 +52,17 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 Chat"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 SemestrakaChatPOS"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Chat/fast">
-				<Option output="/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Chat" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.cTOMp4eHKu/cmake-build-debug"/>
+			<Target title="SemestrakaChatPOS/fast">
+				<Option output="/tmp/tmp.5TDpTqwwZt/cmake-build-debug/SemestrakaChatPOS" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.5TDpTqwwZt/cmake-build-debug"/>
+
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -69,38 +73,40 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 Chat/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.cTOMp4eHKu/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 SemestrakaChatPOS/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.5TDpTqwwZt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/arrayList.c">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/arrayList.c">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/arrayList.h">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/arrayList.h">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/client.c">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/client.c">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/client.h">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/client.h">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/main.c">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/main.c">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/server.c">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/server.c">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/server.h">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/server.h">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/sharedCode.h">
-			<Option target="Chat"/>
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/sharedCode.h">
+			<Option target="SemestrakaChatPOS"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.cTOMp4eHKu/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.5TDpTqwwZt/CMakeLists.txt">
+
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
