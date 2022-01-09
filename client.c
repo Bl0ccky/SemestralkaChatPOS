@@ -1,7 +1,7 @@
 #include "client.h"
 #include <stdbool.h>
 
-#define MAX_BUFFER_SIZE 1024
+#define MAX_BUFFER_SIZE 512
 
 int initSocket(int * port, char * host, int * sockfd, struct sockaddr_in * serv_addr, struct hostent * server)
 {
