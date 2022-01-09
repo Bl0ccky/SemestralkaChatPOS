@@ -1,6 +1,5 @@
 #include "client.h"
 #include "server.h"
-#include "arrayList.h"
 
 
 int main(int argc, char * argv[])
